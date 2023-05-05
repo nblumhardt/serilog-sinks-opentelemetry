@@ -48,11 +48,11 @@ static class Program
         {
             SendLogs(grpcLogger, "grpc/protobuf");
         }
-
-        using (source.StartActivity("http-loop"))
-        {
-            SendLogs(httpLogger, "http/protobuf");
-        }
+        //
+        // using (source.StartActivity("http-loop"))
+        // {
+        //     SendLogs(httpLogger, "http/protobuf");
+        // }
 
         Thread.Sleep(5000);
     }
@@ -80,8 +80,8 @@ static class Program
 
     static ILogger GetLogger(OtlpProtocol protocol)
     {
-        var port = protocol == OtlpProtocol.HttpProtobuf ? 4318 : 4317;
-        var endpoint = $"http://localhost:{port}/v1/logs";
+        var port = protocol == OtlpProtocol.HttpProtobuf ? 4318 : 45341;
+        var endpoint = $"https://localhost:{port}/v1/logs";
 
         return new LoggerConfiguration()
             .MinimumLevel.Information()
